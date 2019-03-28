@@ -5,7 +5,6 @@ stages:
 variables:
   test: "EJob.Test"
 before_script:
-  - "cd EJob"
   - "dotnet restore"
 build:
   stage: build
