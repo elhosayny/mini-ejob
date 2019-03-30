@@ -1,0 +1,17 @@
+image: microsoft/dotnet:latest
+stages:
+  - build
+  - test
+variables:
+  test: "Ejob.Test"
+before_script:
+  - "dotnet restore"
+build:
+  stage: build
+  script:
+    - "dotnet build"
+test:
+  stage: test
+  script:
+    - "cd $test"
+    - "dotnet test"
