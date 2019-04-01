@@ -10,10 +10,12 @@ build:
   stage: build
   script:
     - "dotnet build"
+  only:
+    - develop
 test:
   stage: test
   script:
     - "cd $test"
     - "dotnet test"
-only:
-    - master
+  only:
+    - develop
