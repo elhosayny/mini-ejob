@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using EJob.Contracts;
 using EJob.Models;
-using EJob.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,12 +28,12 @@ namespace EJob
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<EjobContext>(
                 options=> options.UseMySql(Configuration.GetConnectionString("Default"))
             );
+            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<EjobContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +49,8 @@ namespace EJob
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
             app.Use(async (context,next) => {
                 await next();
                 if(context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))

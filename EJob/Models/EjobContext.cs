@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace EJob.Models
 {
-    public class EjobContext : DbContext
+    public class EjobContext : IdentityDbContext
     {
-        public EjobContext(DbContextOptions<EjobContext> options) : base(options)
+        public EjobContext(DbContextOptions options) : base(options)
         {
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
     }
 }
