@@ -8,11 +8,11 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { MainComponent } from './dashboard/main/main.component';
 
-const appRoutes: Routes = [
+/*const appRoutes: Routes = [
   {path:'',component:MainComponent},
-  {path:'register',component:RegistrationComponent},
-  {path:'login',component:LoginComponent}
-]
+  {path:'user/register',component:RegistrationComponent},
+  {path:'user/login',component:LoginComponent}
+]*/
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     MainComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    //RouterModule.forRoot(appRoutes),
     BrowserModule,
     AppRoutingModule
   ],
