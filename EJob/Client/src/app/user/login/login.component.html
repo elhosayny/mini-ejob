@@ -6,14 +6,21 @@
   <div class="login-box-body">
     <p class="login-box-msg">Connecter vous pour commencer votre session</p>
 
-    <form action="../../index2.html" method="post">
+    <form [formGroup]="loginForm">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Nom d'utilisation">
+        <input type="email" class="form-control" placeholder="Nom d'utilisation" formControlName="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <div *ngIf="loginForm.get('Email').touched && loginForm.get('Email').errors">
+            <span *ngIf="loginForm.get('Email').errors?.required" class="has-feedback text-danger">Saisissez l'email</span>
+            <span *ngIf="loginForm.get('Email').errors?.email" class="has-feedback text-danger">L'email est invalide</span>
+          </div>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Mot de passe">
+        <input type="password" class="form-control" placeholder="Mot de passe" formControlName="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div *ngIf="loginForm.get('Password').touched && loginForm.get('Password').errors">
+          <span *ngIf="loginForm.get('Password').errors?.required" class="has-feedback text-danger">Saisissez le mot de passe</span>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-7">
@@ -25,7 +32,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-5">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid">Se connecter</button>
         </div>
         <!-- /.col -->
       </div>
