@@ -11,6 +11,6 @@ export class UserService {
 
   register(body)
   {
-    this.httpClient.post('/api/user/register',body)
+    return this.httpClient.post('/api/user/register',body)
   }
 }
