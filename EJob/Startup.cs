@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EJob.Contracts;
 using EJob.Models;
+using EJob.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,7 @@ namespace EJob
                 options=> options.UseMySql(Configuration.GetConnectionString("Default"))
             );
             services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<EjobContext>();
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

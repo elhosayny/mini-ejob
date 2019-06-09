@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EJob.Contracts;
 using EJob.Models;
+using EJob.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +15,11 @@ namespace EJob.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private IUserRepository _userRepository;
 
-        public UserController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        public UserController(IUserRepository userRepository)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userRepository = userRepository;
         }
 
         [HttpPost]
@@ -27,17 +27,9 @@ namespace EJob.Controllers
         //POST : api/User/Register
         public async Task<Object> PostUser(UserModel userModel)
         {
-            var applicationUser = new ApplicationUser()
-            {
-                UserName = userModel.Username,
-                Email = userModel.Email,
-                FirstName = userModel.FirstName,
-                LastName = userModel.LastName
-            };
-
             try
             {
-                var result = await _userManager.CreateAsync(applicationUser, userModel.Password);
+                var result = await _userRepository.CreateAsync(userModel);
                 return Ok(result);
             }
             catch (Exception ex)
