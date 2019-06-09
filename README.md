@@ -5,6 +5,7 @@ ejob is a web app that manages printing job developed with dotnet core and angul
 ## Used stack
 - dotnet core 2.2 for back end
 - angular 7.2 for frontend
+- MySQL 9.4
 ## How to run
 In a terminale write the follow commands
 Clone the project
@@ -15,20 +16,23 @@ git clone https://github.com/elhosayny/mini-ejob.git
 
 Make sure to have dotnet cli installed to follow this steps.
 
-Build the backend
+**Build the backend**
 
 ```bash
 cd mini-ejob
 dotnet build
 ```
-Build the frontend
+**Build the frontend**
 
 ```bash
 cd EJob\Client
 ng build
 ```
+**Setting up the database**
 
-Run it
+change the MySQL credentials in the file **appsettings.json** the database is generated automatically with Entity Framework
+
+**Run the app**
 ```bash
 cd ..
 dotnet run
