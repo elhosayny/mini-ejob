@@ -1,25 +1,46 @@
+
 # Ejob
+ejob is a web app that manages printing job developed with dotnet core and angular
 
-ejob is web app that manage printing job developed with dotnet core and angular 
-
-## Getting started
-
-To contribute to this project start by cloning the project
-
-```bash
-git clone https://gitlab.com/elhosayny/ejob-web-app.git
-```
-and before you write any core create a new git flow feature using the comand bellow
+## Used stack
+- dotnet core 2.2 for back end
+- angular 7.2 for frontend
+## How to run
+In a terminale write the follow commands
+Clone the project
 
 ```bash
-git flow start feature MYFEATURE
+git clone https://github.com/elhosayny/mini-ejob.git
 ```
 
-to push your changes use the command bellow
+Make sure to have dotnet cli installed to follow this steps.
+
+Build the backend
 
 ```bash
-git flow feature publish MYFEATURE	
+cd mini-ejob
+dotnet build
+```
+Build the frontend
+
+```bash
+cd EJob\Client
+ng build
 ```
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+Run it
+```bash
+cd ..
+dotnet run
+```
+You will get a message like that one, access the link shown in the command prompt
+```
+Hosting environment: Development
+Content root path: E:\Project_C_sharp\EJob\EJob
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+```
+
+## Message for recruiters 
+
+This project is not complete yet but I think it has all the necessary code to evaluate my programming skills I will keep improving and sending changes every day.
