@@ -8,56 +8,56 @@
 
     <form [formGroup]="registerForm" (submit)="onSubmit()">
       <div class="form-group has-feedback required">
-        <input type="text" class="form-control" placeholder="Nom d'utilisation" formControlName="UserName">
+        <input type="text" class="form-control" placeholder="Nom d'utilisation" formControlName="userName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="formControls.UserName.touched && formControls.UserName.errors"
+        <span *ngIf="userName.touched && userName.errors"
           class="invalid-feedback text-danger">Le nom d'utilisation est
           obligatoire</span>
       </div>
       <div class="form-group has-feedback required">
-        <input type="text" class="form-control" placeholder="Prénom" formControlName="FirstName">
+        <input type="text" class="form-control" placeholder="Prénom" formControlName="firstName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="formControls.FirstName.touched && formControls.FirstName.errors"
+        <span *ngIf="firstName.touched && firstName.errors"
           class="invalid-feedback text-danger">Le prénom est
           obligatoire</span>
       </div>
       <div class="form-group has-feedback required">
-        <input type="text" class="form-control" placeholder="Nom" formControlName="LastName">
+        <input type="text" class="form-control" placeholder="Nom" formControlName="lastName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="formControls.LastName.touched && formControls.LastName.errors"
+        <span *ngIf="lastName.touched && lastName.errors"
           class="invalid-feedback text-danger">Le nom est
           obligatoire</span>
       </div>
 
       <div class="form-group has-feedback required">
-        <input type="email" class="form-control" placeholder="Email" formControlName="Email">
+        <input type="email" class="form-control" placeholder="Email" formControlName="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        <div *ngIf="formControls.Email.touched && formControls.Email.errors" class="invalid-feedback text-danger">
-          <span *ngIf="formControls.Email.errors.required">L'email est obligatoire</span>
-          <span *ngIf="formControls.Email.errors.email">L'email est invalid (p. ex., email@example.com)</span>
+        <div *ngIf="email.touched && email.errors" class="invalid-feedback text-danger">
+          <span *ngIf="email.errors.required">L'email est obligatoire</span>
+          <span *ngIf="email.errors.email">L'email est invalid (p. ex., email@example.com)</span>
         </div>
       </div>
-      <div formGroupName="Passwords">
+      <div formGroupName="passwords">
         <div class="form-group has-feedback required">
-          <input type="password" class="form-control" placeholder="Mot de passe" formControlName="Password">
+          <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          <div *ngIf="registerForm.get('Passwords.Password').touched && registerForm.get('Passwords.Password').errors"
+          <div *ngIf="password.touched && password.errors"
             class="invalid-feedback text-danger">
-            <span *ngIf="registerForm.get('Passwords.Password').errors?.required">Le mot de passe est obligatoire</span>
-            <span *ngIf="registerForm.get('Passwords.Password').errors?.pattern">Le mot de passe doit avoir au mois 8
+            <span *ngIf="password.errors?.required">Le mot de passe est obligatoire</span>
+            <span *ngIf="password.errors?.pattern">Le mot de passe doit avoir au mois 8
               caractères, des caracère miniscule, des caractère majuscule,des caractère spécial.</span>
           </div>
         </div>
         <div class="form-group has-feedback required">
           <input type="password" class="form-control" placeholder="Confirmer le mot de passe"
-            formControlName="ConfirmPassword">
+            formControlName="confirmPassword">
           <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           <div
-            *ngIf="registerForm.get('Passwords.ConfirmPassword').touched && registerForm.get('Passwords.ConfirmPassword').errors"
+            *ngIf="confirmPassword.touched && confirmPassword.errors"
             class="invalid-feedback text-danger">
-            <span *ngIf="registerForm.get('Passwords.ConfirmPassword').errors?.required">La confirmation de mot de passe
+            <span *ngIf="confirmPassword.errors?.required">La confirmation de mot de passe
               est obligatoire</span>
-            <span *ngIf="registerForm.get('Passwords.ConfirmPassword').errors?.passwordMismatch">La confirmation de mot
+            <span *ngIf="confirmPassword.errors?.passwordMismatch">La confirmation de mot
               de passe n'est pas identique</span>
           </div>
         </div>
@@ -69,20 +69,20 @@
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat"
-            [disabled]="!registerForm.valid || isLoading"><i class='fa fa-circle-o-notch fa-spin' *ngIf="isLoading"></i> S'inscrire </button>
+            [disabled]="!registerForm.valid || loading"><i class='fa fa-circle-o-notch fa-spin' *ngIf="loading"></i> S'inscrire </button>
         </div>
         <!-- /.col -->
       </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="alert alert-success alert-dismissible" id="registrationAlert" role="alert"
-            *ngIf="showSuccessRegistrationAlert">
+            *ngIf="success">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
             <strong>Vous êtes bien inscrit,</strong> cliquez <a routerLink="/user/login">ici</a> pour se connecter.
           </div>
           <div class="alert alert-danger alert-dismissible" id="registrationAlert" role="alert"
-            *ngIf="showErrorRegistrationAlert">
+            *ngIf="error">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
             {{alertMessageContent}}
