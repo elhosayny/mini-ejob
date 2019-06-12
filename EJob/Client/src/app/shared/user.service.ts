@@ -1,6 +1,5 @@
 import { User } from './models/user.model';
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

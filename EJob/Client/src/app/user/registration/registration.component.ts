@@ -26,14 +26,12 @@ export class RegistrationComponent implements OnInit {
       lastName:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
       passwords:this.formBuilder.group({
-        password:['',[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')]],
+        password:['',[Validators.required,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}')]],
         confirmPassword:['',Validators.required]},{
           validator: comparePasswords
         })
     });
   }
-
-  get formControls() { return this.registerForm.controls; }
 
   get userName(){ return this.registerForm.get("userName"); }
 
