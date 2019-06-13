@@ -1,21 +1,25 @@
+import { User } from './../../shared/models/user.model';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../../shared/user.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { Observable, from, throwError } from 'rxjs';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
   let fixture: ComponentFixture<RegistrationComponent>;
+  let userService: UserService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrationComponent],
-      providers: [UserService],
+      providers: [ UserService],
       imports: [ReactiveFormsModule, HttpClientModule]
     })
       .compileComponents();
+    userService = TestBed.get(UserService);
   }));
 
   beforeEach(() => {
@@ -111,6 +115,36 @@ describe('RegistrationComponent', () => {
     component.password.setValue("P@$$w0rd");
     component.confirmPassword.setValue("P@$$w0rd");
     expect(component.registerForm.valid).toBeTruthy();
+
+  });
+
+  it("should success be truthy and error to be falsy",()=>{
+    spyOn(userService,"register").and.callFake((user)=>{
+      return from([{succeeded: true,error:false}])
+    });
+    component.onSubmit();
+    expect(component.success).toBeTruthy();
+    expect(component.error).toBeFalsy();
+
+  });
+
+  it("should success be falsy and error to be truthy",()=>{
+    spyOn(userService,"register").and.callFake((user)=>{
+      return from([{succeeded: false,error:true}])
+    });
+    component.onSubmit();
+    expect(component.success).toBeFalsy();
+    expect(component.error).toBeTruthy();
+
+  });
+
+  it("should success be falsy and error to be truthy",()=>{
+    spyOn(userService,"register").and.callFake((user)=>{
+      return throwError(new Error('404 NOT FOUND'));
+    });
+    component.onSubmit();
+    expect(component.success).toBeFalsy();
+    expect(component.error).toBeTruthy();
 
   });
 
