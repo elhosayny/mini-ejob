@@ -1,21 +1,23 @@
-import { User } from './../../shared/models/user.model';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../../shared/user.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { Observable, from, throwError } from 'rxjs';
+import { from, throwError } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
   let fixture: ComponentFixture<RegistrationComponent>;
   let userService: UserService;
+  let submitButtonDe: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrationComponent],
-      providers: [ UserService],
+      providers: [UserService],
       imports: [ReactiveFormsModule, HttpClientModule]
     })
       .compileComponents();
@@ -26,6 +28,7 @@ describe('RegistrationComponent', () => {
     fixture = TestBed.createComponent(RegistrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    submitButtonDe = fixture.debugElement.query(By.css("button[type=submit]"));
   });
 
   it('should create', () => {
@@ -55,6 +58,11 @@ describe('RegistrationComponent', () => {
     expect(component.password.valid).toBeFalsy();
     component.confirmPassword.setValue("");
     expect(component.confirmPassword.valid).toBeFalsy();
+  });
+
+  it("should disable the submit button when the form is not valid", () => {
+
+    expect(submitButtonDe.nativeElement.disabled).toBeTruthy();
   });
 
   it("should validate the form when the username, firstname and lastname are not empty", () => {
@@ -106,8 +114,8 @@ describe('RegistrationComponent', () => {
     expect(component.confirmPassword.valid).toBeTruthy()
   });
 
-  it("should validate the form registration",()=>{
-    
+  it("should validate the form registration", () => {
+
     component.userName.setValue("username");
     component.firstName.setValue("firstname");
     component.lastName.setValue("lastname");
@@ -118,9 +126,21 @@ describe('RegistrationComponent', () => {
 
   });
 
-  it("should success be truthy and error to be falsy",()=>{
-    spyOn(userService,"register").and.callFake((user)=>{
-      return from([{succeeded: true,error:false}])
+  it("should enable the submit button when the form is valid", () => {
+
+    component.userName.setValue("username");
+    component.firstName.setValue("firstname");
+    component.lastName.setValue("lastname");
+    component.email.setValue("email@example.com");
+    component.password.setValue("P@$$w0rd");
+    component.confirmPassword.setValue("P@$$w0rd");
+    fixture.detectChanges();
+    expect(submitButtonDe.nativeElement.disabled).toBeFalsy();
+  });
+
+  it("should success be truthy and error to be falsy", () => {
+    spyOn(userService, "register").and.callFake((user) => {
+      return from([{ succeeded: true, error: false }])
     });
     component.onSubmit();
     expect(component.success).toBeTruthy();
@@ -128,9 +148,9 @@ describe('RegistrationComponent', () => {
 
   });
 
-  it("should success be falsy and error to be truthy",()=>{
-    spyOn(userService,"register").and.callFake((user)=>{
-      return from([{succeeded: false,error:true}])
+  it("should success be falsy and error to be truthy", () => {
+    spyOn(userService, "register").and.callFake((user) => {
+      return from([{ succeeded: false, error: true }])
     });
     component.onSubmit();
     expect(component.success).toBeFalsy();
@@ -138,8 +158,8 @@ describe('RegistrationComponent', () => {
 
   });
 
-  it("should success be falsy and error to be truthy",()=>{
-    spyOn(userService,"register").and.callFake((user)=>{
+  it("should success be falsy and error to be truthy", () => {
+    spyOn(userService, "register").and.callFake((user) => {
       return throwError(new Error('404 NOT FOUND'));
     });
     component.onSubmit();

@@ -7,10 +7,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  register(user:User)
-  {
-    return this.httpClient.post('/api/user/register',user)
+  register(user: User) {
+    return this.httpClient.post('/api/user/register', user);
+  }
+
+  login(user:User){
+    return this.httpClient.post("/api/user/login",user);
   }
 }
