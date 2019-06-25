@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../../shared/user.service';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
@@ -137,6 +137,19 @@ describe('RegistrationComponent', () => {
     fixture.detectChanges();
     expect(submitButtonDe.nativeElement.disabled).toBeFalsy();
   });
+
+  it("should call onSubmit when the form is submited",fakeAsync(()=>{
+    component.userName.setValue("username");
+    component.firstName.setValue("firstname");
+    component.lastName.setValue("lastname");
+    component.email.setValue("email@example.com");
+    component.password.setValue("P@$$w0rd");
+    component.confirmPassword.setValue("P@$$w0rd");
+    fixture.detectChanges();
+    spyOn(component,"onSubmit");
+    submitButtonDe.nativeElement.click();
+    expect(component.onSubmit).toHaveBeenCalled();
+  }));
 
   it("should success be truthy and error to be falsy", () => {
     spyOn(userService, "register").and.callFake((user) => {

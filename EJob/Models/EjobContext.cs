@@ -10,6 +10,6 @@ namespace EJob.Models
 
         }
 
-        public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

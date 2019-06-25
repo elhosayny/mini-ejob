@@ -6,7 +6,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Connecter vous pour commencer votre session</p>
 
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Nom d'utilisation" formControlName="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -35,7 +35,8 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-5">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid">Se
+          <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid"><i
+              class='fa fa-circle-o-notch fa-spin' *ngIf="loading"></i> Se
             connecter</button>
         </div>
         <!-- /.col -->

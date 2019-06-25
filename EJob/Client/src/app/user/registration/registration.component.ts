@@ -61,14 +61,17 @@ export class RegistrationComponent implements OnInit {
         if (res.succeeded) {
           this.registerForm.reset();
           this.success = true;
+          this.error = false;
         } else {
           this.alertMessageContent = "Des erreurs au niveau serveur sont produit.";
+          this.success = false;
           this.error = true;
         }
       },
       err => {
         this.loading = false;
         this.alertMessageContent = "Vérifier votre connection internet.";
+        this.success = false;
         this.error = true;
 
       }

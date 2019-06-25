@@ -20,7 +20,7 @@ namespace EJob.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : api/User/Register
-        public async Task<Object> PostUser(UserModel userModel)
+        public async Task<Object> RegisterAsync(UserModel userModel)
         {
             try
             {
@@ -31,6 +31,23 @@ namespace EJob.Controllers
             {
                 throw ex;
             }
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        //POST : api/User/Login
+        public async Task<Object> LoginAsync(LoginModel loginModel)
+        {
+            try
+            {
+                var result = await _userRepository.LoginAsync(loginModel);
+                return Ok(new { token = result });
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
     }
