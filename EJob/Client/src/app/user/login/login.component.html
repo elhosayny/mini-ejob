@@ -8,13 +8,11 @@
 
     <form [formGroup]="loginForm" (submit)="onSubmit()">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Nom d'utilisation" formControlName="email">
+        <input type="text" class="form-control" placeholder="Nom d'utilisation" formControlName="userName">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        <div *ngIf="email.touched && email.errors">
-          <span *ngIf="email.errors?.required" class="has-feedback text-danger">Saisissez
-            l'email</span>
-          <span *ngIf="email.errors?.email" class="has-feedback text-danger">L'email est
-            invalide</span>
+        <div *ngIf="userName.touched && userName.errors">
+          <span *ngIf="userName.errors?.required" class="has-feedback text-danger">Saisissez
+            le nom d'utilisateur</span>
         </div>
       </div>
       <div class="form-group has-feedback">
@@ -35,17 +33,15 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-5">
-          <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid"><i
+          <button type="submit" class="btn btn-primary btn-block btn-flat" [disabled]="!loginForm.valid || loading"><i
               class='fa fa-circle-o-notch fa-spin' *ngIf="loading"></i> Se
             connecter</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
-
     <!-- /.social-auth-links -->
     <a routerLink="/user/register" class="text-center">Crée un nouveau compte</a>
-
   </div>
   <!-- /.login-box-body -->
 </div>

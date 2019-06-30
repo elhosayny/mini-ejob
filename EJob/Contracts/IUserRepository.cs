@@ -8,5 +8,6 @@ namespace EJob.Contracts
     {
         Task<IdentityResult> CreateAsync(UserModel userModel);
         Task<string> LoginAsync(LoginModel loginModel);
+        Task<ApplicationUser> FindByIdAsync(string userId);
     }
 }

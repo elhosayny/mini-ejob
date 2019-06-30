@@ -1,7 +1,9 @@
 ﻿using EJob.Contracts;
 using EJob.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EJob.Controllers
@@ -41,7 +43,10 @@ namespace EJob.Controllers
             try
             {
                 var result = await _userRepository.LoginAsync(loginModel);
-                return Ok(new { token = result });
+                if (result != null)
+                    return Ok(new { token = result });
+                else
+                    return BadRequest();
             }
             catch(Exception ex)
             {

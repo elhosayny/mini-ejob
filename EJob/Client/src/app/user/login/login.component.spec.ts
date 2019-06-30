@@ -30,21 +30,14 @@ describe('LoginComponent', () => {
   });
 
   it("should create form with all login controls", () => {
-    expect(component.email).toEqual(jasmine.any(AbstractControl));
+    expect(component.userName).toEqual(jasmine.any(AbstractControl));
     expect(component.password).toEqual(jasmine.any(AbstractControl));
     expect(component.rememberMe).toEqual(jasmine.any(AbstractControl));
   });
 
-  it("should valid return false when email is not valid", () => {
-    component.email.setValue("");
-    expect(component.email.valid).toBeFalsy();
-    component.email.setValue("foo");
-    expect(component.email.valid).toBeFalsy();
-  });
-
-  it("should valid return true when the email is valid", () => {
-    component.email.setValue("foo@example.com");
-    expect(component.email.valid).toBeTruthy();
+  it("should valid return false when userName is empty", () => {
+    component.userName.setValue("");
+    expect(component.userName.valid).toBeFalsy();
   });
 
   it("should require the password", () => {
@@ -58,7 +51,7 @@ describe('LoginComponent', () => {
   });
 
   it("should enable the submit button when the form is valid", () => {
-    component.email.setValue("foo@example.com");
+    component.userName.setValue("username");
     component.password.setValue("P@$$w0rd");
     fixture.detectChanges();
     expect(submitButtonDe.nativeElement.disabled).toBeFalsy();

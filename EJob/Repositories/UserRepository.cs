@@ -64,5 +64,12 @@ namespace EJob.Repositories
                 return null;
             }
         }
+
+        public async Task<ApplicationUser> FindByIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return user;
+        }
+
     }
 }
