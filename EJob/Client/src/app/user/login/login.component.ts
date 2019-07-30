@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   loading: boolean = false;
   success: boolean = false;
+  alertMessageContent: string;
   error: boolean = false;
 
   constructor(private formBuilder: FormBuilder,private userService:UserService,private router:Router) { }
@@ -44,7 +45,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("");
       },
       err =>{
-
+        this.loading = false;
+        this.alertMessageContent = "Vérifier votre connection internet.";
+        this.success = false;
+        this.error = true;
       }
     );
   }
