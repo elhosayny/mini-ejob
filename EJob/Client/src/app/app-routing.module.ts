@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './user/registration/registration.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   //{ path:'' ,redirectTo:'/user/login' ,pathMatch:'full' },
   { path:'',component:MainComponent,canActivate:[AuthGuard] },
   { path:'user/register',component:RegistrationComponent },
