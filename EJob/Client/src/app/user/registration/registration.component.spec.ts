@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../../shared/user.service';
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { RegistrationComponent } from './registration.component';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
@@ -172,7 +172,7 @@ describe('RegistrationComponent', () => {
   });
 
   it("should success be falsy and error to be truthy", () => {
-    spyOn(userService, "register").and.callFake((user) => {
+    spyOn(userService, "register").and.callFake(() => {
       return throwError(new Error('404 NOT FOUND'));
     });
     component.onSubmit();
