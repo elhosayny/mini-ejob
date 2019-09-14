@@ -24,15 +24,12 @@ namespace EJob.Controllers
         //POST : api/User/Register
         public async Task<Object> RegisterAsync(UserModel userModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var result = await _userRepository.CreateAsync(userModel);
                 return Ok(result);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            else return BadRequest("Invalid data");
         }
 
         [HttpPost]
@@ -40,19 +37,15 @@ namespace EJob.Controllers
         //POST : api/User/Login
         public async Task<Object> LoginAsync(LoginModel loginModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var result = await _userRepository.LoginAsync(loginModel);
                 if (result != null)
-                    return Ok(new { token = result });
-                else
-                    return BadRequest();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+                    return BadRequest("Username or password is incorrect");
 
+                return Ok(new { token = result });
+            }
+            else return BadRequest("Invalid data");
         }
 
     }
