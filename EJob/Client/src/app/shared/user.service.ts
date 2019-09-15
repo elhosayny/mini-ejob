@@ -1,16 +1,26 @@
+import { TokenService } from './token.service';
+import { User } from './models/user.model';
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Login } from './models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient,private tokenService:TokenService) { }
 
-  register(body)
+  register(user: User) {
+    return this.httpClient.post('/api/user/register', user);
+  }
+
+  login(login:Login){
+    return this.httpClient.post("/api/user/login",login);
+  }
+
+  isAuthenticated()
   {
-    return this.httpClient.post('/api/user/register',body)
+    return this.tokenService.get() != null;
   }
 }

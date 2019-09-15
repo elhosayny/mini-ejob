@@ -7,5 +7,7 @@ namespace EJob.Contracts
     public interface IUserRepository
     {
         Task<IdentityResult> CreateAsync(UserModel userModel);
+        Task<string> LoginAsync(LoginModel loginModel);
+        Task<ApplicationUser> FindByIdAsync(string userId);
     }
 }
