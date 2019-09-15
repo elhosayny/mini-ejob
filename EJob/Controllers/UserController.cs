@@ -40,7 +40,7 @@ namespace EJob.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _userRepository.LoginAsync(loginModel);
-                if (result != null)
+                if (result == null)
                     return BadRequest("Username or password is incorrect");
 
                 return Ok(new { token = result });
