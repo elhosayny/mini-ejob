@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Ejob.Test
 {
-    public class UnitTest1
+    public class UserControllerTest
     {
         [Fact]
         public void Test1()

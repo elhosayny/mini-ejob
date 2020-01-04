@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UserService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports:[RouterTestingModule,AppModule,HttpClientModule]
+    imports: [RouterTestingModule, AppModule, HttpClientModule]
   }));
 
   it('should be created', () => {

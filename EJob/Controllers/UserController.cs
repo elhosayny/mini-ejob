@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EJob.Contracts;
+using EJob.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using EJob.Contracts;
-using EJob.Models;
-using EJob.Repositories;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EJob.Controllers
 {
@@ -25,17 +22,30 @@ namespace EJob.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : api/User/Register
-        public async Task<Object> PostUser(UserModel userModel)
+        public async Task<Object> RegisterAsync(UserModel userModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var result = await _userRepository.CreateAsync(userModel);
                 return Ok(result);
             }
-            catch (Exception ex)
+            else return BadRequest("Invalid data");
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        //POST : api/User/Login
+        public async Task<Object> LoginAsync(LoginModel loginModel)
+        {
+            if (ModelState.IsValid)
             {
-                throw ex;
+                var result = await _userRepository.LoginAsync(loginModel);
+                if (result == null)
+                    return BadRequest("Username or password is incorrect");
+
+                return Ok(new { token = result });
             }
+            else return BadRequest("Invalid data");
         }
 
     }

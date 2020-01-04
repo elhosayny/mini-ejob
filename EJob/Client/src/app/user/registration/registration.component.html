@@ -10,22 +10,19 @@
       <div class="form-group has-feedback required">
         <input type="text" class="form-control" placeholder="Nom d'utilisation" formControlName="userName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="userName.touched && userName.errors"
-          class="invalid-feedback text-danger">Le nom d'utilisation est
+        <span *ngIf="userName.touched && userName.errors" class="invalid-feedback text-danger">Le nom d'utilisation est
           obligatoire</span>
       </div>
       <div class="form-group has-feedback required">
         <input type="text" class="form-control" placeholder="Prénom" formControlName="firstName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="firstName.touched && firstName.errors"
-          class="invalid-feedback text-danger">Le prénom est
+        <span *ngIf="firstName.touched && firstName.errors" class="invalid-feedback text-danger">Le prénom est
           obligatoire</span>
       </div>
       <div class="form-group has-feedback required">
         <input type="text" class="form-control" placeholder="Nom" formControlName="lastName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        <span *ngIf="lastName.touched && lastName.errors"
-          class="invalid-feedback text-danger">Le nom est
+        <span *ngIf="lastName.touched && lastName.errors" class="invalid-feedback text-danger">Le nom est
           obligatoire</span>
       </div>
 
@@ -41,8 +38,7 @@
         <div class="form-group has-feedback required">
           <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          <div *ngIf="password.touched && password.errors"
-            class="invalid-feedback text-danger">
+          <div *ngIf="password.touched && password.errors" class="invalid-feedback text-danger">
             <span *ngIf="password.errors?.required">Le mot de passe est obligatoire</span>
             <span *ngIf="password.errors?.pattern">Le mot de passe doit avoir au mois 8
               caractères, des caracère miniscule, des caractère majuscule,des caractère spécial.</span>
@@ -52,9 +48,7 @@
           <input type="password" class="form-control" placeholder="Confirmer le mot de passe"
             formControlName="confirmPassword">
           <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-          <div
-            *ngIf="confirmPassword.touched && confirmPassword.errors"
-            class="invalid-feedback text-danger">
+          <div *ngIf="confirmPassword.touched && confirmPassword.errors" class="invalid-feedback text-danger">
             <span *ngIf="confirmPassword.errors?.required">La confirmation de mot de passe
               est obligatoire</span>
             <span *ngIf="confirmPassword.errors?.passwordMismatch">La confirmation de mot
@@ -69,20 +63,19 @@
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat"
-            [disabled]="!registerForm.valid || loading"><i class='fa fa-circle-o-notch fa-spin' *ngIf="loading"></i> S'inscrire </button>
+            [disabled]="!registerForm.valid || loading"><i class='fa fa-circle-o-notch fa-spin' *ngIf="loading"></i>
+            S'inscrire </button>
         </div>
         <!-- /.col -->
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="alert alert-success alert-dismissible" id="registrationAlert" role="alert"
-            *ngIf="success">
+          <div class="alert alert-success alert-dismissible" id="registrationAlert" role="alert" *ngIf="success">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
             <strong>Vous êtes bien inscrit,</strong> cliquez <a routerLink="/user/login">ici</a> pour se connecter.
           </div>
-          <div class="alert alert-danger alert-dismissible" id="registrationAlert" role="alert"
-            *ngIf="error">
+          <div class="alert alert-danger alert-dismissible" id="registrationAlert" role="alert" *ngIf="error">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
             {{alertMessageContent}}
