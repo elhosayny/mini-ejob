@@ -47,4 +47,4 @@ Now listening on: http://localhost:5000
 
 ## Message for recruiters 
 
-This project is not complete yet but I think it has all the necessary code to evaluate my programming skills I will keep improving and sending changes every day.
+This project is not complete yet but I think it has all the necessary code to evaluate my programming skills I will keep improving and sending changes as soon as I can.
